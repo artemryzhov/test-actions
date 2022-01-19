@@ -65,7 +65,7 @@ jobs:
           asset_name: test-report.pdf
           asset_content_type: application/pdf
       - name: Create comment
-        run: gh pr comment ${{ github.event.number }} --body "Realease draft: ${{ steps.create_release.outputs.html_url }}"
+        run: gh pr comment ${{ github.event.number }} --body "Realease draft:${{ steps.create_release.outputs.html_url }}" 
 
   approve_release:
     runs-on: ubuntu-latest
