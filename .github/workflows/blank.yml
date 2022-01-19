@@ -20,7 +20,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: 'release'
-      url: ${{ steps.create_release.outputs.url }}
+      url: ${{ steps.create_release.outputs.html_url }}
     outputs:
       release_id: ${{ steps.create_release.outputs.id }}
       release_url: ${{ steps.create_release.outputs.html_url }}
