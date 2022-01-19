@@ -23,18 +23,22 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     
-      - name: Publish Release
-        # You may pin to the exact commit or the version.
-        # uses: eregon/publish-release@d6aee8c288e653387d895ee64d559fc0dd63339d
-        uses: eregon/publish-release@v1.0.3
+      - name: Create Draft Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
         with:
-          # The ID of the draft release to publish
-          release_id: 1
+          tag_name: '1.0.0'
+          release_name: 'test-release'
+          draft: true
+          prerelease: false
 
   approve_release:
      # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: 'quality'
+    needs: ['release_draft']
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -48,7 +52,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     environment: 'production'
-    needs: ['release_draft', 'approve_release']
+    needs: ['approve_release']
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
