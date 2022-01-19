@@ -38,7 +38,9 @@ jobs:
   approve_release:
      # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    environment: 'quality'
+    environment: 
+      name: 'quality'
+      url: ${{ needs.release_draft.outputs.release_url }}
     needs: ['release_draft']
 
     # Steps represent a sequence of tasks that will be executed as part of the job
