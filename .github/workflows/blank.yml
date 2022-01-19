@@ -14,9 +14,9 @@ jobs:
       - name: Run test cases
         run: echo test success
       - name: Generate report
-        run: echo "report generated" > test-report.pdf
+        run: echo report generated
     outputs:
-      report_file: test-report.pdf
+      report_url: https://lipsum.com/
 
 
   release_draft:
@@ -38,6 +38,9 @@ jobs:
           release_name: Release ${{ github.run_number }}
           draft: true
           prerelease: false
+          
+      - name: Download report      
+        run: curl ${{ needs.test.outputs.report_url }} > test-report.pdf
       - name: Upload Release Asset
         id: upload-release-asset 
         uses: actions/upload-release-asset@v1
@@ -45,8 +48,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ needs.test.outputs.report_file }}
-          asset_name: ${{ needs.test.outputs.report_file }}
+          asset_path: ./test-report.pdf
+          asset_name: test-report.pdf
           asset_content_type: application/pdf
 
   approve_release:
