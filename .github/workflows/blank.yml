@@ -23,7 +23,7 @@ jobs:
       url: ${{ steps.create_release.outputs.url }}
     outputs:
       release_id: ${{ steps.create_release.outputs.id }}
-      release_url: ${{ steps.create_release.outputs.url }}
+      release_url: ${{ steps.create_release.outputs.html_url }}
       
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
