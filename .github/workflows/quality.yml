@@ -66,6 +66,8 @@ jobs:
           asset_content_type: application/pdf
       - name: Create comment
         run: gh pr comment ${{ github.event.number }} --body "Realease draft:${{ steps.create_release.outputs.html_url }}" 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   approve_release:
     runs-on: ubuntu-latest
