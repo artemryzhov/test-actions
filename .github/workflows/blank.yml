@@ -38,6 +38,17 @@ jobs:
           release_name: Release ${{ github.run_number }}
           draft: true
           prerelease: false
+          body: |
+            ##Software Revision Number
+            v.${{ github.run_number }}
+            
+            ##Reason for change
+            
+            ##Changes made 
+            
+            ##Test cases created and/or changed
+            
+            ##Risk assessment
           
       - name: Download report      
         run: curl ${{ needs.test.outputs.report_url }} > test-report.pdf
